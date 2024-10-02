@@ -218,14 +218,78 @@ $clients = [
     ]
 ];
 
-// var_dump($clients);
+var_dump($clients);
 echo $clients["stephane"]["ville"]."<br>";
 
 foreach($clients as $prenom => $coordonnees){
-    echo ucfirst($prenom)." habite ".$coordonnees["adresse"]." ".$coordonnees["cp"]." ".$coordonnees["ville"].
-                " et a comme n° de téléphone : ".$coordonnees["tel"]."<br>";
+    echo ucfirst($prenom)." habite ".$coordonnees["adresse"]." ".$coordonnees["cp"]." ".$coordonnees["ville"]." et a comme n° de téléphone : ".$coordonnees["tel"]."<br>";
 }
 
 // FONCTIONS
 
-function
+echo afficherMessage();
+
+function afficherMessage() : string {
+    $message = "Voici mon message<br>";
+    return $message;
+}
+
+echo calculerCarre(89);
+echo calculerCarre("test"); //Erreur !
+// echo pow(9, 2);
+
+function calculerCarre($nombre) {
+    if(gettype($nombre) == "integer"){
+        $resultat = $nombre * $nombre;
+        return $resultat."<br>";
+    } else {
+        return "Erreur: la valeur doit être un entier !<br>";
+    }
+}
+
+echo calculerMoyenne([9, 10.5, 11, 18, 12])."<br>";
+
+$eleves = [
+    "cindy" => [12, 9, 19, 17, 12, 13],
+    "pascal" => [8, 9, 12, 10, 17]
+];
+
+foreach($eleves as $prenom => $notes){
+    echo "La moyenne de prenom est : ".calculerMoyenne($notes)."<br>";
+}
+
+function calculerMoyenne(array $notes) : float {
+    $nbNotes = count($notes);
+    $sommeNotes = array_sum($notes);
+    $moyenne = round ($sommeNotes / $nbNotes, 2);
+
+    return $moyenne;
+}
+
+echo pairOuImpair(4);
+echo pairOuImpair(5);
+
+function pairOuImpair($nombre) : string {
+
+    if($nombre % 2 == 0) {
+        $resultat = "pair<br>";
+    } else {
+        $resultat = "impair<br>";
+    }
+
+    return "$nombre est $resultat";
+}
+
+echo repeterMot ("Youpi", 6, "-");
+echo repeterMot ("Hourra", 6, "/");
+
+function repeterMot(string $mot, int $nbRepetitions, string $separateur) {
+    $resultat= "";
+    foreach(range(1, $nbRepetitions) as $valeur) {
+        $resultat .= $mot.$separateur;
+    }
+
+    return $resultat;  
+}
+
+echo str_repeat("Bidule", 10);
